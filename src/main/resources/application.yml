@@ -1,9 +1,16 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+    #개발 DB
     url: jdbc:mysql://127.0.0.1/kenblog?serverTimezone=Asia/Seoul
     username: study
     password: study
+
+    #배포 DB
+    #url: jdbc:mysql://15.164.165.56:3306/board?serverTimezone=Asia/Seoul
+    #username: ken
+    #password: 123456
 
   jpa:
     hibernate:
