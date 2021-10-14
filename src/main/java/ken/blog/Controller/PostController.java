@@ -1,7 +1,9 @@
 package ken.blog.Controller;
 
 import ken.blog.domain.Post;
+import ken.blog.domain.User;
 import ken.blog.repository.PostRepository;
+import ken.blog.repository.UserRepository;
 import ken.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     @GetMapping("/")
@@ -45,12 +48,15 @@ public class PostController {
     public String postPost(@Valid PostForm form, Principal principal) {
 
         Post post = new Post();
+        User user = userRepository.findByUsername(principal.getName());
 
         post.setPostTitle(form.getPostTitle());
         post.setPostContent(form.getPostContent());
-        post.setUsername(principal.getName());
+        post.setUser(user);
 
         postService.join(post);
+
+        System.out.println("이름은" + post.getUser().getUsername());
 
         return "redirect:/";
     }

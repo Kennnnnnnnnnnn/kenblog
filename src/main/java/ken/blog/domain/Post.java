@@ -8,15 +8,14 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Post {
 
     @Id
     @GeneratedValue
     @Column(name = "post_id")
     private Long id;
-
-    private String username;
 
     @Column(nullable = false, length = 50)
     private String postTitle;
@@ -28,5 +27,13 @@ public class Post {
     @Column(updatable = false)
     private Date postCreateDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    //연관관계 메서드
+    public void setUser(User user) {
+        this.user = user;
+        user.getPosts().add(this);
+    }
 }

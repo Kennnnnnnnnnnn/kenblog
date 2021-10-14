@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,4 +32,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="username")
     private List<UserRole> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts = new ArrayList<>();
 }
