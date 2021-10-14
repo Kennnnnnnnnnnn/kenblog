@@ -1,5 +1,6 @@
 package ken.blog.Controller;
 
+import javafx.geometry.Pos;
 import ken.blog.domain.Post;
 import ken.blog.domain.User;
 import ken.blog.repository.PostRepository;
