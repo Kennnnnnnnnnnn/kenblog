@@ -56,7 +56,6 @@ public class PostController {
 
         postService.join(post);
 
-        System.out.println("이름은" + post.getUser().getUsername());
 
         return "redirect:/";
     }
@@ -64,6 +63,27 @@ public class PostController {
     @PostMapping("/deletePost/{id}")
     public String deletePost(@PathVariable Long id) {
         postRepository.deleteById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/updatePost/{id}")
+    public String getUpdatePost(@PathVariable Long id, Model model) {
+
+        model.addAttribute("post", postRepository.findById(id).get());
+
+        return "updatePost";
+    }
+
+    @PostMapping("/updatePost/{id}")
+    public String postUpdatePost(@PathVariable Long id, @Valid PostForm form) {
+
+        Post post = postRepository.getById(id);
+
+        post.setPostTitle(form.getPostTitle());
+        post.setPostContent(form.getPostContent());
+
+        postService.join(post);
+
         return "redirect:/";
     }
 }
