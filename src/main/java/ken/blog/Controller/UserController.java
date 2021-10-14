@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/createAccount")
-    public String getCreate(Model model, Principal principal) {
+    public String getCreate(Model model) {
         model.addAttribute("createForm", new CreateForm());
         return "createAccount";
     }
