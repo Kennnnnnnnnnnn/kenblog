@@ -1,11 +1,10 @@
 package ken.blog.Controller;
 
-import ken.blog.domain.Comment;
 import ken.blog.domain.Post;
 import ken.blog.domain.User;
+import ken.blog.form.PostForm;
 import ken.blog.repository.PostRepository;
 import ken.blog.repository.UserRepository;
-import ken.blog.service.CommentService;
 import ken.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,31 +23,30 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
-    private final CommentService commentService;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     @GetMapping("/")
-    public String postList(Model model) {
-        List<Post> postList = postRepository.findAll();
-        Collections.reverse(postList);
-        model.addAttribute("postList", postList);
+    public String mainList(Model model) {
+        List<Post> list = postRepository.findAll();
+        Collections.reverse(list);
+        model.addAttribute("list", list);
         return "list";
     }
 
     @GetMapping("/{id}")
-    public String list(@PathVariable Long id, Model model) {
+    public String detailList(@PathVariable Long id, Model model) {
         model.addAttribute("list", postRepository.findById(id).get());
         return "detailList";
     }
 
     @GetMapping("/createPost")
-    public String getPost() {
+    public String getCreatePost() {
         return "createPost";
     }
 
     @PostMapping("/createPost")
-    public String postPost(@Valid PostForm form, Principal principal) {
+    public String postCreatePost(@Valid PostForm form, Principal principal) {
 
         Post post = new Post();
         User user = userRepository.findByUsername(principal.getName());
@@ -88,23 +86,5 @@ public class PostController {
         postService.join(post);
 
         return "redirect:/";
-    }
-
-    @PostMapping("/createComment/{id}")
-    public String createComment(@PathVariable Long id, @Valid CommentForm form, Principal principal) {
-
-        System.out.println("프린" + principal.getName());
-
-        Comment comment = new Comment();
-        User user = userRepository.findByUsername(principal.getName());
-        Post post = postRepository.findById(id).get();
-
-        comment.setCommentContent(form.getCommentContent());
-        comment.setUser(user);
-        comment.setPost(post);
-
-        commentService.join(comment);
-
-        return "redirect:/{id}";
     }
 }

@@ -23,17 +23,17 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                    <div th:each="post : ${postList}">
+                    <div th:each="list : ${list}">
                     <div class="post-preview">
-                        <a th:href="@{/{id}(id=${post.id})}">
-                            <h2 class="post-title" th:text="${post.postTitle}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></h2>
-                            <h3 class="post-subtitle" th:text="${post.postContent}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></h3>
+                        <a th:href="@{/{id}(id=${list.id})}">
+                            <h2 class="post-title" th:text="${list.postTitle}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></h2>
+                            <h3 class="post-subtitle" th:text="${list.postContent}" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></h3>
                         </a>
                         <p class="post-meta">
                             Posted by
-                             <b th:text="${post.user.username}"></b>
+                             <b th:text="${list.user.username}"></b>
                              on
-                            <a th:text="${post.postCreateDate}"></a>
+                            <a th:text="${list.postCreateDate}"></a>
                         </p>
                     </div>
                     <!-- Divider-->

@@ -1,4 +1,4 @@
-package ken.blog.Controller;
+package ken.blog.form;
 
 import lombok.Getter;
 import lombok.Setter;

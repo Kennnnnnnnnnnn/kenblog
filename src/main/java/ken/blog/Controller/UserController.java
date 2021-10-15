@@ -2,6 +2,8 @@ package ken.blog.Controller;
 
 import ken.blog.domain.User;
 import ken.blog.domain.UserRole;
+import ken.blog.form.CreateForm;
+import ken.blog.form.LoginForm;
 import ken.blog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,11 +70,4 @@ public class UserController {
     public String getLogout() {
         return "logoutAccount";
     }
-
-    /**
-    @PostMapping("/logoutAccount")
-    public String postLogout() {
-        return "redirect:/";
-    }
-    */
 }
