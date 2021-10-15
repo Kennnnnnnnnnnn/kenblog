@@ -8,4 +8,5 @@ public class PostForm {
 
     private String postTitle;
     private String postContent;
+    private String id;
 }

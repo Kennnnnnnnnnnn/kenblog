@@ -8,7 +8,7 @@ spring:
     password: study
 
     #배포 DB
-    #url: jdbc:mysql://15.164.165.56:3306/board?serverTimezone=Asia/Seoul
+    #url: jdbc:mysql://13.209.54.228:3306/board?serverTimezone=Asia/Seoul
     #username: ken
     #password: 123456
 

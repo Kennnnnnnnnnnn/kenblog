@@ -30,16 +30,45 @@
                 <a th:text="${list.postContent}"></a>
                 <form th:action="@{'/deletePost/' + ${list.id}}" method="post">
                     <div class="justify-content-end mb-4">
-                        <a class="btn btn-secondary" style="margin-top: 30px"
-                                th:href="@{'/updatePost/' + ${list.id}}">Edit
+                        <a class="btn btn-secondary" style="margin-top: 15px"
+                           th:href="@{'/updatePost/' + ${list.id}}">Edit
                         </a>
-                        <button class="btn btn-danger" type="submit" style="margin-top: 30px; margin-left: 10px">Delete</button>
+                        <button class="btn btn-danger" type="submit" style="margin-top: 15px; margin-left: 10px">
+                            Delete
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </article>
+<article class="mb-4" style=" border-top: 1px solid #dee2e6 !important; ">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h1 style="margin-top: 15px; margin-bottom: 10px;">Comment</h1>
+                    <div th:each="comment : ${list.comments}"
+                         style="margin-top: 20px; margin-bottom: 15px; border-bottom: 1px solid #dee2e6">
+                        UserName: <a th:text="${comment.user.username}"></a><br>
+                        Comment: <a th:text="${comment.commentContent}"></a><br>
+                        <a th:text="${comment.commentCreateDate}"></a>
+                    </div>
+                    <form th:action="@{'/createComment/' + ${list.id}}" method="post">
+                        <label for="commentContent" style="margin-top: 30px;">Comment</label>
+                        <textarea id="commentContent" name="commentContent"
+                                  style="height: 77px; width: 50vw; border: 1px solid #dee2e6"></textarea>
+                        <button class="btn btn-success" type="submit" style="margin-top: 15px;">
+                            Submit
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+>
 <!-- Footer-->
 <footer class="border-top">
     <div class="container px-4 px-lg-5">

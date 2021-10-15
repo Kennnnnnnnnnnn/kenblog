@@ -1,9 +1,11 @@
 package ken.blog.Controller;
 
+import ken.blog.domain.Comment;
 import ken.blog.domain.Post;
 import ken.blog.domain.User;
 import ken.blog.repository.PostRepository;
 import ken.blog.repository.UserRepository;
+import ken.blog.service.CommentService;
 import ken.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final CommentService commentService;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
@@ -85,5 +88,23 @@ public class PostController {
         postService.join(post);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/createComment/{id}")
+    public String createComment(@PathVariable Long id, @Valid CommentForm form, Principal principal) {
+
+        System.out.println("프린" + principal.getName());
+
+        Comment comment = new Comment();
+        User user = userRepository.findByUsername(principal.getName());
+        Post post = postRepository.findById(id).get();
+
+        comment.setCommentContent(form.getCommentContent());
+        comment.setUser(user);
+        comment.setPost(post);
+
+        commentService.join(comment);
+
+        return "redirect:/{id}";
     }
 }
