@@ -3,6 +3,8 @@ package ken.blog.domain;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments = new ArrayList<>();
 
     //연관관계 메서드

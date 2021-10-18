@@ -1,7 +1,7 @@
 package ken.blog.Config;
 
-import ken.blog.Handler.CustomLoginSuccessHandler;
-import ken.blog.Handler.CustomLogoutSuccessHandler;
+import ken.blog.handler.CustomLoginSuccessHandler;
+import ken.blog.handler.CustomLogoutSuccessHandler;
 import ken.blog.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
